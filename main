@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HELL•|•FARD | Discord & Full-Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --deep-black: #0E0E10;
+            --darker-black: #1A1A1A;
+            --neon-purple: #A259FF;
+            --electric-violet: #9D4EDD;
+            --blurple: #5865F2;
+            --lavender-mist: #C9B6F0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--deep-black);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 10px rgba(162, 89, 255, 0.7);
+        }
+        
+        .glass-card {
+            background: rgba(26, 26, 26, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(162, 89, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(162, 89, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .btn-purple {
+            background: linear-gradient(135deg, var(--neon-purple), var(--electric-violet));
+            transition: all 0.3s ease;
+        }
+        
+        .btn-purple:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(162, 89, 255, 0.4);
+        }
+        
+        .btn-outline-purple {
+            border: 2px solid var(--neon-purple);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-purple:hover {
+            background-color: rgba(162, 89, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(162, 89, 255, 0.2);
+        }
+        
+        .discord-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #3BA55D;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            border: 2px solid var(--darker-black);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 165, 93, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 165, 93, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 165, 93, 0); }
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid var(--neon-purple);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--neon-purple); }
+        }
+        
+        .skill-badge {
+            background: rgba(162, 89, 255, 0.1);
+            border: 1px solid var(--neon-purple);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-badge:hover {
+            background: rgba(162, 89, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .project-card:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(5deg) scale(1.03);
+        }
+        
+        .tech-logo {
+            transition: all 0.3s ease;
+            filter: grayscale(100%) brightness(0.8);
+        }
+        
+        .tech-logo:hover {
+            filter: none;
+            transform: scale(1.1);
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(162, 89, 255, 0.3);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            mix-blend-mode: screen;
+        }
+        
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--neon-purple);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .scroll-top-btn.active {
+            opacity: 1;
+        }
+        
+        .scroll-top-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(162, 89, 255, 0.5);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-purple), transparent);
+        }
+        
+        .discord-input {
+            background: rgba(30, 31, 34, 0.8);
+            border: 1px solid rgba(162, 89, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .discord-input:focus {
+            outline: none;
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 0 2px rgba(162, 89, 255, 0.2);
+        }
+        
+        .discord-btn {
+            background: var(--blurple);
+            transition: all 0.3s ease;
+        }
+        
+        .discord-btn:hover {
+            background: #4752C4;
+            transform: translateY(-2px);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            color: var(--neon-purple);
+            transform: translateY(-3px);
+        }
+
+        /* Hamburger Menu Animation */
+        .hamburger-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger-icon.active {
+            transform: rotate(90deg);
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px rgba(162, 89, 255, 0.7);
+        }
+        
+        .floating-avatar {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--neon-purple), var(--blurple), var(--lavender-mist));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Cursor Trail -->
+    <div class="cursor-trail"></div>
+    
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top-btn" id="scrollTopBtn">
+        <i class="fas fa-arrow-up text-white"></i>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-purple-900 border-opacity-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-white text-xl font-bold glow-text">
+                        H E L L •|• F A R D
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-purple-400 transition-all duration-300 relative group">
+                        <span>Home</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#about" class="text-gray-300 hover:text-purple-400 transition-all duration-300 relative group">
+                        <span>About</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#services" class="text-gray-300 hover:text-purple-400 transition-all duration-300 relative group">
+                        <span>Services</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#portfolio" class="text-gray-300 hover:text-purple-400 transition-all duration-300 relative group">
+                        <span>Portfolio</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#contact" class="text-gray-300 hover:text-purple-400 transition-all duration-300 relative group">
+                        <span>Contact</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl hamburger-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-black bg-opacity-90 backdrop-filter backdrop-blur-lg border-t border-purple-900 border-opacity-30">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-gray-300 hover:text-purple-400 transition-all duration-300 relative group">
+                    <span>Home</span>
+                    <span class="absolute bottom-2 left-3 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]"></span>
+                </a>
+                <a href="#about" class="block px-3 py-2 text-gray-300 hover:text-purple-400 transition-all duration-300 relative group">
+                    <span>About</span>
+                    <span class="absolute bottom-2 left-3 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]"></span>
+                </a>
+                <a href="#services" class="block px-3 py-2 text-gray-300 hover:text-purple-400 transition-all duration-300 relative group">
+                    <span>Services</span>
+                    <span class="absolute bottom-2 left-3 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]"></span>
+                </a>
+                <a href="#portfolio" class="block px-3 py-2 text-gray-300 hover:text-purple-400 transition-all duration-300 relative group">
+                    <span>Portfolio</span>
+                    <span class="absolute bottom-2 left-3 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]"></span>
+                </a>
+                <a href="#contact" class="block px-3 py-2 text-gray-300 hover:text-purple-400 transition-all duration-300 relative group">
+                    <span>Contact</span>
+                    <span class="absolute bottom-2 left-3 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 glow-text">
+                        H E L L •|• F A R D
+                    </h1>
+                    <div class="typewriter text-xl md:text-2xl text-purple-300 mb-8">
+                        Crafting Discord experiences. Designing the web. Solving problems.
+                    </div>
+                    <div class="flex flex-wrap gap-4 mb-10">
+                        <a href="#contact" class="btn-purple text-white px-6 py-3 rounded-lg font-semibold">
+                            <i class="fas fa-gem mr-2"></i> Hire Me
+                        </a>
+                        <a href="#portfolio" class="btn-outline-purple text-purple-400 px-6 py-3 rounded-lg font-semibold">
+                            <i class="fas fa-laptop-code mr-2"></i> My Projects
+                        </a>
+                        <a href="#" class="btn-outline-purple text-purple-400 px-6 py-3 rounded-lg font-semibold">
+                            <i class="fab fa-discord mr-2"></i> DM on Discord
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <div class="floating-avatar">
+                            <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-purple-500 relative">
+                                <img src="https://via.placeholder.com/256" alt="Profile" class="w-full h-full object-cover">
+                                <div class="discord-status"></div>
+                            </div>
+                            <div class="absolute inset-0 rounded-full border-4 border-transparent animate-spin-slow" style="border-image: linear-gradient(to right, var(--neon-purple), var(--blurple), var(--neon-purple)) 1; box-shadow: 0 0 20px rgba(162, 89, 255, 0.5);"></div>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <p class="text-xl font-semibold">HELL•|•FARD#0000</p>
+                            <p class="text-purple-300">Online</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-darker-black bg-opacity-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold mb-16 text-center section-title gradient-text">
+                About Me
+            </h2>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/3 flex justify-center">
+                    <div class="relative">
+                        <div class="w-64 h-64 rounded-lg overflow-hidden border-2 border-purple-500 glass-card">
+                            <img src="https://via.placeholder.com/256" alt="About" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -inset-4 rounded-lg bg-purple-500 opacity-20 blur-lg -z-10"></div>
+                    </div>
+                </div>
+                <div class="md:w-2/3">
+                    <p class="text-lg text-gray-300 mb-6">
+                        I'm a passionate full-stack developer specializing in Discord bot development, web design, and mobile applications. With over 5 years of experience in the tech industry, I've helped numerous clients and communities enhance their digital presence.
+                    </p>
+                    <p class="text-lg text-gray-300 mb-8">
+                        My expertise lies in creating seamless user experiences, solving complex problems, and building scalable solutions that drive engagement and growth. I thrive in collaborative environments and enjoy mentoring others in the tech space.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium">
+                            <i class="fab fa-discord mr-2"></i> Discord Bot Development
+                        </span>
+                        <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium">
+                            <i class="fas fa-globe mr-2"></i> Web Development
+                        </span>
+                        <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium">
+                            <i class="fas fa-mobile-alt mr-2"></i> Mobile App Development
+                        </span>
+                        <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium">
+                            <i class="fas fa-paint-brush mr-2"></i> UI/UX Design
+                        </span>
+                        <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium">
+                            <i class="fas fa-users mr-2"></i> Team Management
+                        </span>
+                        <span class="skill-badge px-4 py-2 rounded-full text-sm font-medium">
+                            <i class="fas fa-lightbulb mr-2"></i> Problem Solving
+                        </span>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <a href="#contact" class="btn-purple text-white px-6 py-3 rounded-lg font-semibold">
+                            <i class="fas fa-paper-plane mr-2"></i> Contact Me
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold mb-16 text-center section-title gradient-text">
+                What I Do
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="glass-card p-8 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-purple-900 bg-opacity-30 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-robot text-3xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">Discord Bot Development</h3>
+                    <p class="text-gray-300 text-center">
+                        Custom Discord bots with advanced features including moderation, economy systems, music playback, and community engagement tools.
+                    </p>
+                </div>
+                
+                <!-- Service Card 2 -->
+                <div class="glass-card p-8 rounded-xl hover:shadow-lg transition-all 
